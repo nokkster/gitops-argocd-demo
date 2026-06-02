@@ -85,6 +85,30 @@ ArgoCD synchronise automatiquement le cluster.
 
 ---
 
+## Pipeline CI/CD
+
+Le projet contient une pipeline GitHub Actions située dans :
+
+.github/workflows/validate-k8s.yml
+
+Cette pipeline est exécutée à chaque push ou pull request.
+
+Elle réalise deux contrôles :
+
+1. Vérification de la syntaxe YAML des fichiers du dépôt.
+2. Validation des manifests Kubernetes avec kubeconform.
+
+Dans cette architecture, la CI ne déploie pas directement dans Kubernetes.  
+Le déploiement est assuré par ArgoCD selon le principe GitOps.
+
+Ainsi :
+
+- GitHub Actions = validation CI
+- ArgoCD = déploiement CD
+- GitHub = source de vérité
+
+---
+
 ## Résultats
 
 * Déploiement automatique
